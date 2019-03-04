@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		var QUESTIONS = [
+			{
+				number: 1,
+				text: 'Какой город является столицей Российской Федерации?',
+				answers: ['Москва', 'Лондон', 'Калининград', 'ТАГИИИЛ'],
+				correct: 1
+			},
+			{
+				number: 2,
+				text: 'Что кричат десантники в Париже?',
+				answers: ['tu rêvais de moi', 'Можем повторить!', 'Ква-ква', 'ТАГИИИЛ'],
+				correct: 4
+			},
+            {
+				number: 3,
+				text: 'Сколько сантиметров в метре?',
+				answers: ['60', '30', '50', '100'],
+				correct: 1
+			},
+            {
+				number: 4,
+				text: 'В каком году был основан Санкт-Петербург?',
+				answers: ['1147', '1733', '1703', '1613'],
+				correct: 3
+			},
+            {
+            	number: 5,
+				text: 'Какая планет располжена ближе к солнце?',
+				answers: ['Земля', 'Меркурий', 'Венера', 'Марс'],
+				correct: 2
+			}
+		];
+		console.log(QUESTIONS);
+
+		var game = function (questions) {
+			let play = true;
+			let round = 0;
+			while (play == true && round < QUESTIONS.length) {
+				let quest = generateQuestion (questions, round);
+				let answer = prompt (quest.qText);
+				play = check (answer, round);
+				round++;
+			}
+		}; 
+
+		var generateQuestion = function (mas, qNumber) {
+			let answers = '';
+			for (let i = 0; i < 4; i++) {
+				answers = answers + (i + 1) + ' - ' + mas[qNumber].answers[i] + '\n';
+			}
+
+			let text = mas[qNumber].text + '\n' + answers + 'Введите правильный ответ';
+
+			let right = mas[qNumber].correct;
+			return {
+				qText: text,
+				right: right
+			};
+		};
+
+		var check = function (answer, round) {
+			if (answer == QUESTIONS[round].correct) {
+				if (++round == QUESTIONS.length) { 
+                alert('Вы выйграли!' + '\nЧисло правильных ответов: ' + round);
+				return true;
+                } else {
+                alert('Правильно!');
+				return true;    
+                }
+			} else {
+				alert('НЕПРАВИЛЬНО! \nПравильный ответ: ' + QUESTIONS[round].answers[round] + '\nЧисло правильных ответов: ' + round);
+				return false;
+			}
+		};
+		game(QUESTIONS);
+	</script>
+</body>
+</html>
